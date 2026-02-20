@@ -10,7 +10,7 @@ release.properties
 .settings/
 .project
 .classpath
- bin/
+bin/
 
 # STS
 .springBeans
