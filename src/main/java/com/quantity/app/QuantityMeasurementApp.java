@@ -1,29 +1,19 @@
 package com.quantity.app;
+
+import com.quantity.domain.length.Length;
 import com.quantity.domain.length.LengthUnit;
-import com.quantity.domain.length.Quantity;
+import com.quantity.service.UnitConversionService;
 
 public class QuantityMeasurementApp {
 
-    public static boolean demonstrateLengthEquality(Quantity q1, Quantity q2) {
-        return q1.equals(q2);
-    }
-
-    public static void demonstrate(String label, Quantity q1, Quantity q2) {
-        System.out.println(label + " : " + demonstrateLengthEquality(q1, q2));
-    }
-
     public static void main(String[] args) {
 
-        demonstrate("Feet == Feet",
-                new Quantity(1.0, LengthUnit.FEET),
-                new Quantity(1.0, LengthUnit.FEET));
+        UnitConversionService service = new UnitConversionService();
 
-        demonstrate("Inches == Inches",
-                new Quantity(1.0, LengthUnit.INCH),
-                new Quantity(1.0, LengthUnit.INCH));
+        Length feet = new Length(2, LengthUnit.FEET);
 
-        demonstrate("Feet == Inches",
-                new Quantity(1.0, LengthUnit.FEET),
-                new Quantity(12.0, LengthUnit.INCH));
+        Length result = service.convert(feet, LengthUnit.INCHES);
+
+        System.out.println("Converted Value: " + result);
     }
 }
