@@ -1,3 +1,4 @@
+
 package com.quantity.app;
 
 import com.quantity.domain.Quantity;
