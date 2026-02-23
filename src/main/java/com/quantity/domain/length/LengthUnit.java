@@ -1,4 +1,3 @@
-
 package com.quantity.domain.length;
 
 public enum LengthUnit {
