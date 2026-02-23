@@ -1,3 +1,4 @@
+
 package com.quantity.domain;
 
 public interface IMeasurable {
