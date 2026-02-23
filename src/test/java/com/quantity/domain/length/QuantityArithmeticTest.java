@@ -2,39 +2,61 @@ package com.quantity.domain.length;
 
 import com.quantity.domain.Quantity;
 import com.quantity.unit.LengthUnit;
-import com.quantity.unit.WeightUnit;
 import com.quantity.unit.VolumeUnit;
+import org.junit.jupiter.api.Test;
 
-public class QuantityArithmeticTest {
+import static org.junit.jupiter.api.Assertions.*;
 
-    public static void main(String[] args) {
+class QuantityArithmeticTest {
 
+    @Test
+    void testSubtraction_CrossUnit() {
         Quantity<LengthUnit> l1 = new Quantity<>(10.0, LengthUnit.FEET);
         Quantity<LengthUnit> l2 = new Quantity<>(6.0, LengthUnit.INCHES);
 
-        System.out.println("Subtraction (Length):");
-        System.out.println(l1.subtract(l2));
-        System.out.println(l1.subtract(l2, LengthUnit.INCHES));
+        Quantity<LengthUnit> result = l1.subtract(l2);
+        assertEquals(9.5, result.getValue(), 0.01);
+    }
 
-        System.out.println("\nDivision (Length):");
-        System.out.println(l1.divide(new Quantity<>(2.0, LengthUnit.FEET)));
+    @Test
+    void testSubtraction_NegativeResult() {
+        Quantity<LengthUnit> l1 = new Quantity<>(5.0, LengthUnit.FEET);
+        Quantity<LengthUnit> l2 = new Quantity<>(10.0, LengthUnit.FEET);
 
-        Quantity<WeightUnit> w1 = new Quantity<>(10.0, WeightUnit.KILOGRAM);
-        Quantity<WeightUnit> w2 = new Quantity<>(5000.0, WeightUnit.GRAM);
+        Quantity<LengthUnit> result = l1.subtract(l2);
+        assertEquals(-5.0, result.getValue(), 0.01);
+    }
 
-        System.out.println("\nSubtraction (Weight):");
-        System.out.println(w1.subtract(w2));
+    @Test
+    void testDivision_SameUnit() {
+        Quantity<LengthUnit> l1 = new Quantity<>(10.0, LengthUnit.FEET);
+        Quantity<LengthUnit> l2 = new Quantity<>(2.0, LengthUnit.FEET);
 
-        System.out.println("\nDivision (Weight):");
-        System.out.println(w1.divide(new Quantity<>(5.0, WeightUnit.KILOGRAM)));
+        assertEquals(5.0, l1.divide(l2), 0.0001);
+    }
 
+    @Test
+    void testDivision_CrossUnit() {
+        Quantity<LengthUnit> l1 = new Quantity<>(24.0, LengthUnit.INCHES);
+        Quantity<LengthUnit> l2 = new Quantity<>(2.0, LengthUnit.FEET);
+
+        assertEquals(1.0, l1.divide(l2), 0.0001);
+    }
+
+    @Test
+    void testDivision_ByZero() {
+        Quantity<LengthUnit> l1 = new Quantity<>(10.0, LengthUnit.FEET);
+        Quantity<LengthUnit> l2 = new Quantity<>(0.0, LengthUnit.FEET);
+
+        assertThrows(ArithmeticException.class, () -> l1.divide(l2));
+    }
+
+    @Test
+    void testSubtraction_Volume() {
         Quantity<VolumeUnit> v1 = new Quantity<>(5.0, VolumeUnit.LITRE);
         Quantity<VolumeUnit> v2 = new Quantity<>(500.0, VolumeUnit.MILLILITRE);
 
-        System.out.println("\nSubtraction (Volume):");
-        System.out.println(v1.subtract(v2));
-
-        System.out.println("\nDivision (Volume):");
-        System.out.println(v1.divide(new Quantity<>(10.0, VolumeUnit.LITRE)));
+        Quantity<VolumeUnit> result = v1.subtract(v2);
+        assertEquals(4.5, result.getValue(), 0.01);
     }
 }
