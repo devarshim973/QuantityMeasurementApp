@@ -7,10 +7,15 @@ pom.xml.next
 release.properties
 
 # Eclipse
+bin/
 .settings/
+.metadata/
 .project
 .classpath
+<<<<<<< HEAD
 bin/
+=======
+>>>>>>> 2186eaad5b58fc0647e8161bcccd69b668f2a664
 
 # STS
 .springBeans
