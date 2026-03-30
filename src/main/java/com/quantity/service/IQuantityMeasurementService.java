@@ -1,27 +1,37 @@
 package com.quantity.service;
 
-import java.util.List;
-
 import com.quantity.dto.QuantityDTO;
-import com.quantity.model.QuantityMeasurementEntity;
+import com.quantity.dto.QuantityInputDTO;
+import com.quantity.dto.QuantityMeasurementDTO;
+
+import java.util.List;
 
 public interface IQuantityMeasurementService {
 
-    boolean compare(QuantityDTO q1, QuantityDTO q2);
+    // ===== Core Operations =====
 
-    QuantityDTO convert(QuantityDTO input, String targetUnit);
+    QuantityMeasurementDTO compare(QuantityInputDTO input);
 
-    QuantityDTO add(QuantityDTO q1, QuantityDTO q2);
+    QuantityMeasurementDTO convert(QuantityInputDTO input);
 
-    QuantityDTO subtract(QuantityDTO q1, QuantityDTO q2);
+    QuantityMeasurementDTO add(QuantityInputDTO input);
 
-    double divide(QuantityDTO q1, QuantityDTO q2);
+    QuantityMeasurementDTO subtract(QuantityInputDTO input);
 
-    List<QuantityMeasurementEntity> getAll();
+    QuantityMeasurementDTO divide(QuantityInputDTO input);
 
-    QuantityMeasurementEntity getById(Long id);
+    // ===== History & Reporting =====
 
-    void deleteById(Long id);
+    // Get history of all measurements by operation type
+    List<QuantityMeasurementDTO> getHistoryByOperation(String operation);
 
-    void deleteAll();
+    // Get history of all measurements by measurement type
+    List<QuantityMeasurementDTO> getHistoryByMeasurementType(String measurementType);
+
+    // Get count of successful operations by operation type
+    long getOperationCount(String operation);
+
+    // Get all errored measurements
+    List<QuantityMeasurementDTO> getErrorHistory();
+
 }
