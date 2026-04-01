@@ -1,6 +1,9 @@
 package com.quantity.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
@@ -13,165 +16,12 @@ import java.time.LocalDateTime;
         @Index(name = "idx_created_at",       columnList = "created_at")
     }
 )
-
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class QuantityMeasurementEntity {
 
-    public QuantityMeasurementEntity(Long id, double thisValue, String thisUnit, String thisMeasurementType,
-			double thatValue, String thatUnit, String thatMeasurementType, String operation, String resultString,
-			double resultValue, String resultUnit, String resultMeasurementType, String errorMessage, boolean isError,
-			LocalDateTime createdAt, LocalDateTime updatedAt) {
-		
-		this.id = id;
-		this.thisValue = thisValue;
-		this.thisUnit = thisUnit;
-		this.thisMeasurementType = thisMeasurementType;
-		this.thatValue = thatValue;
-		this.thatUnit = thatUnit;
-		this.thatMeasurementType = thatMeasurementType;
-		this.operation = operation;
-		this.resultString = resultString;
-		this.resultValue = resultValue;
-		this.resultUnit = resultUnit;
-		this.resultMeasurementType = resultMeasurementType;
-		this.errorMessage = errorMessage;
-		this.isError = isError;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
-	public QuantityMeasurementEntity() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public double getThisValue() {
-		return thisValue;
-	}
-
-	public void setThisValue(double thisValue) {
-		this.thisValue = thisValue;
-	}
-
-	public String getThisUnit() {
-		return thisUnit;
-	}
-
-	public void setThisUnit(String thisUnit) {
-		this.thisUnit = thisUnit;
-	}
-
-	public String getThisMeasurementType() {
-		return thisMeasurementType;
-	}
-
-	public void setThisMeasurementType(String thisMeasurementType) {
-		this.thisMeasurementType = thisMeasurementType;
-	}
-
-	public double getThatValue() {
-		return thatValue;
-	}
-
-	public void setThatValue(double thatValue) {
-		this.thatValue = thatValue;
-	}
-
-	public String getThatUnit() {
-		return thatUnit;
-	}
-
-	public void setThatUnit(String thatUnit) {
-		this.thatUnit = thatUnit;
-	}
-
-	public String getThatMeasurementType() {
-		return thatMeasurementType;
-	}
-
-	public void setThatMeasurementType(String thatMeasurementType) {
-		this.thatMeasurementType = thatMeasurementType;
-	}
-
-	public String getOperation() {
-		return operation;
-	}
-
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
-
-	public String getResultString() {
-		return resultString;
-	}
-
-	public void setResultString(String resultString) {
-		this.resultString = resultString;
-	}
-
-	public double getResultValue() {
-		return resultValue;
-	}
-
-	public void setResultValue(double resultValue) {
-		this.resultValue = resultValue;
-	}
-
-	public String getResultUnit() {
-		return resultUnit;
-	}
-
-	public void setResultUnit(String resultUnit) {
-		this.resultUnit = resultUnit;
-	}
-
-	public String getResultMeasurementType() {
-		return resultMeasurementType;
-	}
-
-	public void setResultMeasurementType(String resultMeasurementType) {
-		this.resultMeasurementType = resultMeasurementType;
-	}
-
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-
-	public boolean isError() {
-		return isError;
-	}
-
-	public void setError(boolean isError) {
-		this.isError = isError;
-	}
-
-	public LocalDateTime getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(LocalDateTime createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public LocalDateTime getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(LocalDateTime updatedAt) {
-		this.updatedAt = updatedAt;
-	}
-
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

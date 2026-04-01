@@ -4,45 +4,24 @@ import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Arrays;
 import java.util.List;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuantityDTO {
+
 	@NotNull(message = "Value cannot be null")
 	private Double value;
 
 	@NotEmpty(message = "Unit name cannot be empty")
 	private String unit;
 
-
-	public Double getValue() {
-		return value;
-	}
-
-
-	public void setValue(Double value) {
-		this.value = value;
-	}
-
-
-	public String getUnit() {
-		return unit;
-	}
-
-
-	public void setUnit(String unit) {
-		this.unit = unit;
-	}
-
-
-	public QuantityDTO(Double value, String unit) {
-		
-		this.value = value;
-		this.unit = unit;
-	}
 	@NotEmpty(message = "Measurement type cannot be empty")
 	@Pattern(regexp = "LengthUnit|WeightUnit|VolumeUnit|TemperatureUnit", message = "Measurement type must be LengthUnit, WeightUnit, VolumeUnit, or TemperatureUnit")
 	private String measurementType;

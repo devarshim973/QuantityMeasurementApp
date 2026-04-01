@@ -1,12 +1,16 @@
 package com.quantity.dto;
 
 import com.quantity.model.QuantityMeasurementEntity;
-
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class QuantityMeasurementDTO {
 
     private double thisValue;
@@ -26,108 +30,10 @@ public class QuantityMeasurementDTO {
 
     private String errorMessage;
     private boolean error;
-	public double getThisValue() {
-		return thisValue;
-	}
-	public void setThisValue(double thisValue) {
-		this.thisValue = thisValue;
-	}
-	public String getThisUnit() {
-		return thisUnit;
-	}
-	public void setThisUnit(String thisUnit) {
-		this.thisUnit = thisUnit;
-	}
-	public String getThisMeasurementType() {
-		return thisMeasurementType;
-	}
-	public void setThisMeasurementType(String thisMeasurementType) {
-		this.thisMeasurementType = thisMeasurementType;
-	}
-	public double getThatValue() {
-		return thatValue;
-	}
-	public void setThatValue(double thatValue) {
-		this.thatValue = thatValue;
-	}
-	public String getThatUnit() {
-		return thatUnit;
-	}
-	public void setThatUnit(String thatUnit) {
-		this.thatUnit = thatUnit;
-	}
-	public String getThatMeasurementType() {
-		return thatMeasurementType;
-	}
-	public void setThatMeasurementType(String thatMeasurementType) {
-		this.thatMeasurementType = thatMeasurementType;
-	}
-	public String getOperation() {
-		return operation;
-	}
-	public void setOperation(String operation) {
-		this.operation = operation;
-	}
-	public String getResultString() {
-		return resultString;
-	}
-	public void setResultString(String resultString) {
-		this.resultString = resultString;
-	}
-	public double getResultValue() {
-		return resultValue;
-	}
-	public void setResultValue(double resultValue) {
-		this.resultValue = resultValue;
-	}
-	public String getResultUnit() {
-		return resultUnit;
-	}
-	public void setResultUnit(String resultUnit) {
-		this.resultUnit = resultUnit;
-	}
-	public String getResultMeasurementType() {
-		return resultMeasurementType;
-	}
-	public void setResultMeasurementType(String resultMeasurementType) {
-		this.resultMeasurementType = resultMeasurementType;
-	}
-	public String getErrorMessage() {
-		return errorMessage;
-	}
-	public void setErrorMessage(String errorMessage) {
-		this.errorMessage = errorMessage;
-	}
-	public boolean isError() {
-		return error;
-	}
-	public void setError(boolean error) {
-		this.error = error;
-	}
-	public QuantityMeasurementDTO(double thisValue, String thisUnit, String thisMeasurementType, double thatValue,
-			String thatUnit, String thatMeasurementType, String operation, String resultString, double resultValue,
-			String resultUnit, String resultMeasurementType, String errorMessage, boolean error) {
-		
-		this.thisValue = thisValue;
-		this.thisUnit = thisUnit;
-		this.thisMeasurementType = thisMeasurementType;
-		this.thatValue = thatValue;
-		this.thatUnit = thatUnit;
-		this.thatMeasurementType = thatMeasurementType;
-		this.operation = operation;
-		this.resultString = resultString;
-		this.resultValue = resultValue;
-		this.resultUnit = resultUnit;
-		this.resultMeasurementType = resultMeasurementType;
-		this.errorMessage = errorMessage;
-		this.error = error;
-	}
+
     // ===== Static Factory Methods =====
 
-    public QuantityMeasurementDTO() {
-		// TODO Auto-generated constructor stub
-	}
-	/**
+    /**
      * Convert QuantityMeasurementEntity -> QuantityMeasurementDTO
      */
     public static QuantityMeasurementDTO fromEntity(QuantityMeasurementEntity entity) {
@@ -199,6 +105,6 @@ public class QuantityMeasurementDTO {
         return dtos.stream()
                 .map(QuantityMeasurementDTO::toEntity)
                 .collect(Collectors.toList());
-    
+    }
+
 }
-   }
