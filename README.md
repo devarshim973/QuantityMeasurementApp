@@ -205,6 +205,6 @@ http://localhost:8080/swagger-ui/index.html
 
 ### Author👨‍💻
 
-[DEVARSHI Mishra](https://github.com/devarshim973) - Software Developer👨‍💻 | Cloud Enthusiast            
+[Devarshi Mishra](https://github.com/devarshim973) - Software Developer👨‍💻 | Cloud Enthusiast            
 B.Tech - `[Computer Science & Engineering]`         
 Java | Maven | OOPs | Clean Architecture 
