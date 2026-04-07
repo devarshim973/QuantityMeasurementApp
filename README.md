@@ -54,6 +54,76 @@ quantity-measurement-app/
 │                   └── length/
 │
 └── target/
+
+# 🚀 Quantity Measurement App (UC18 - JWT + OAuth2)
+
+## 📌 Overview
+
+The **Quantity Measurement App** is a Spring Boot-based REST API that supports various measurement operations like **Length, Weight, Volume, and Temperature**.
+
+This project is enhanced with **advanced security features** including:
+
+* 🔐 JWT Authentication
+* 🌐 GitHub OAuth2 Login
+* 🗄️ JPA & Database Integration
+* 📊 Swagger API Documentation
+* ⚡ Robust Exception Handling & Validation
+
+---
+
+## 🎯 Key Features
+
+### 🧮 Core Functionalities
+
+* Compare quantities
+* Convert units
+* Arithmetic operations (Add, Subtract, Divide)
+* Measurement history tracking
+* Error tracking & reporting
+
+---
+
+### 🔐 Security Features (UC18)
+
+* JWT-based Authentication (Stateless)
+* GitHub OAuth2 Login
+* Secure REST APIs
+* Custom Authentication Filter
+* Unauthorized access handling (401 response)
+
+---
+
+### 🗄️ Database & Persistence
+
+* JPA (Hibernate ORM)
+* H2 (Development)
+* MySQL (Production ready)
+* Indexed queries for performance
+
+---
+
+### 📊 API & Monitoring
+
+* Swagger UI (API Testing)
+* Spring Boot Actuator
+* Logging & Debugging support
+
+---
+
+## 🏗️ Project Structure
+
+```
+com.app
+│
+├── config              # Security & Swagger Config
+├── controller          # REST Controllers
+├── service             # Business Logic
+├── repository          # JPA Repositories
+├── model               # Entities & Domain Models
+├── dto                 # Request/Response DTOs
+├── security            # JWT & OAuth2 Components
+├── exception           # Global Exception Handling
+└── core                # Measurement Logic
 ```
 
 ---
