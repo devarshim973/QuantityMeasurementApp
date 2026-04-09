@@ -262,6 +262,132 @@
     ├── 📂 src/main/resources/
     │   └── 📄 application.yml
     └── 📄 pom.xml
+
+A Maven-based Java application that demonstrates object-oriented design principles
+by implementing length equality comparison across multiple development stages (UC1, UC2, UC3).
+
+The project evolves incrementally using Git branches to demonstrate refactoring,
+DRY principle, abstraction, polymorphism, and clean architecture.
+
+---
+
+### 📌 Project Overview
+
+A generic, extensible, and SOLID-compliant Java application for performing measurement operations across multiple categories:
+
+- Length
+- Weight
+- Volume
+- Temperature (with selective arithmetic support)
+
+The system evolves incrementally from **UC1 to UC14**, demonstrating clean architecture, generics, functional interfaces, lambda expressions, and interface refactoring principles.
+
+Design a scalable and type-safe measurement system that:
+
+- Supports unit conversion
+- Maintains cross-category isolation
+- Centralizes arithmetic logic
+- Enforces operation validity constraints
+- Demonstrates real-world object-oriented design
+
+---
+
+### Project Structure🏗 
+
+#### 🏗 Project Structure (Maven)
+
+```
+quantity-measurement-app/
+│
+├── pom.xml
+├── .gitignore
+│
+├── src/
+│   ├── main/
+│   │   └── java/
+│   │       └── com/quantity/
+│   │           ├── app/
+│   │           └── domain/
+│   │               └── length/
+│   │
+│   └── test/
+│       └── java/
+│           └── com/quantity/
+│               └── domain/
+│                   └── length/
+│
+└── target/
+
+# 🚀 Quantity Measurement App (UC18 - JWT + OAuth2)
+
+## 📌 Overview
+
+The **Quantity Measurement App** is a Spring Boot-based REST API that supports various measurement operations like **Length, Weight, Volume, and Temperature**.
+
+This project is enhanced with **advanced security features** including:
+
+* 🔐 JWT Authentication
+* 🌐 GitHub OAuth2 Login
+* 🗄️ JPA & Database Integration
+* 📊 Swagger API Documentation
+* ⚡ Robust Exception Handling & Validation
+
+---
+
+## 🎯 Key Features
+
+### 🧮 Core Functionalities
+
+* Compare quantities
+* Convert units
+* Arithmetic operations (Add, Subtract, Divide)
+* Measurement history tracking
+* Error tracking & reporting
+
+---
+
+### 🔐 Security Features (UC18)
+
+* JWT-based Authentication (Stateless)
+* GitHub OAuth2 Login
+* Secure REST APIs
+* Custom Authentication Filter
+* Unauthorized access handling (401 response)
+
+---
+
+### 🗄️ Database & Persistence
+
+* JPA (Hibernate ORM)
+* H2 (Development)
+* MySQL (Production ready)
+* Indexed queries for performance
+
+---
+
+### 📊 API & Monitoring
+
+* Swagger UI (API Testing)
+* Spring Boot Actuator
+* Logging & Debugging support
+
+---
+
+## 🏗️ Project Structure
+
+```
+com.app
+│
+├── config              # Security & Swagger Config
+├── controller          # REST Controllers
+├── service             # Business Logic
+├── repository          # JPA Repositories
+├── model               # Entities & Domain Models
+├── dto                 # Request/Response DTOs
+├── security            # JWT & OAuth2 Components
+├── exception           # Global Exception Handling
+└── core                # Measurement Logic
+>>>>>>> origin/dev
 ```
 
 ---
@@ -475,381 +601,9 @@ You should see **3 services registered** in the Eureka Dashboard:
 
 ---
 
-## 📡 API Endpoints
-
-> All requests go through the **API Gateway on port 8080**
-
-### 🔓 Auth Endpoints — Public (No Token Required)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/auth/register` | Register a new user |
-| `POST` | `/auth/login` | Login and receive JWT token |
-| `GET` | `/auth/oauth-success` | GitHub OAuth2 callback |
-
----
-
-### 🔐 Quantity Endpoints — Secured (JWT Token Required)
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/v1/quantities/add` | ➕ Add two quantities |
-| `POST` | `/api/v1/quantities/subtract` | ➖ Subtract two quantities |
-| `POST` | `/api/v1/quantities/multiply` | ✖️ Multiply two quantities |
-| `POST` | `/api/v1/quantities/divide` | ➗ Divide two quantities |
-| `POST` | `/api/v1/quantities/compare` | ⚖️ Compare two quantities |
-| `POST` | `/api/v1/quantities/convert` | 🔄 Convert to another unit |
-| `GET` | `/api/v1/quantities/history/operation/{op}` | 📜 History by operation type |
-| `GET` | `/api/v1/quantities/history/type/{type}` | 📜 History by measurement type |
-| `GET` | `/api/v1/quantities/count/{operation}` | 🔢 Count of successful operations |
-| `GET` | `/api/v1/quantities/history/errored` | ⚠️ All errored operations |
-
----
-
-## 📝 Request & Response Examples
-
-### 1️⃣ Register a New User
-
-```http
-POST http://localhost:8080/auth/register
-Content-Type: application/json
-
-{
-    "name": "John Doe",
-    "email": "john@gmail.com",
-    "mobileNumber": "9876543210",
-    "password": "Password@123"
-}
-```
-
-**✅ Response:**
-```
-"User registered successfully"
-```
-
----
-
-### 2️⃣ Login & Get JWT Token
-
-```http
-POST http://localhost:8080/auth/login
-Content-Type: application/json
-
-{
-    "email": "john@gmail.com",
-    "password": "Password@123"
-}
-```
-
-**✅ Response:**
-```json
-{
-    "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb2huQGdtYWlsLmNvbSIsImlhdCI6...",
-    "message": "Login successful"
-}
-```
-
-> 💡 Copy the `token` value — you'll need it in the `Authorization` header for all secured endpoints!
-
----
-
-### 3️⃣ Add Two Quantities (Length)
-
-```http
-POST http://localhost:8080/api/v1/quantities/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
-Content-Type: application/json
-
-{
-    "quantity1": {
-        "value": 1.0,
-        "unit": "FEET",
-        "measurementType": "LengthUnit"
-    },
-    "quantity2": {
-        "value": 12.0,
-        "unit": "INCHES",
-        "measurementType": "LengthUnit"
-    }
-}
-```
-
-**✅ Response:** *(1 FOOT + 12 INCHES = 2 FEET)*
-```json
-{
-    "thisValue": 1.0,
-    "thisUnit": "FEET",
-    "thisMeasurementType": "LengthUnit",
-    "thatValue": 12.0,
-    "thatUnit": "INCHES",
-    "thatMeasurementType": "LengthUnit",
-    "operation": "add",
-    "resultValue": 2.0,
-    "resultUnit": "FEET",
-    "resultMeasurementType": "LengthUnit",
-    "error": false
-}
-```
-
----
-
-### 4️⃣ Convert Temperature
-
-```http
-POST http://localhost:8080/api/v1/quantities/convert
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
-Content-Type: application/json
-
-{
-    "quantity1": {
-        "value": 100.0,
-        "unit": "CELSIUS",
-        "measurementType": "TemperatureUnit"
-    },
-    "quantity2": {
-        "value": 0.0,
-        "unit": "FAHRENHEIT",
-        "measurementType": "TemperatureUnit"
-    }
-}
-```
-
-**✅ Response:** *(100°C = 212°F)*
-```json
-{
-    "operation": "convert",
-    "resultValue": 212.0,
-    "resultUnit": "FAHRENHEIT",
-    "resultMeasurementType": "TemperatureUnit",
-    "error": false
-}
-```
-
----
-
-### 5️⃣ Get Operation History
-
-```http
-GET http://localhost:8080/api/v1/quantities/history/operation/add
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
-```
-
-**✅ Response:**
-```json
-[
-    {
-        "operation": "add",
-        "resultValue": 2.0,
-        "resultUnit": "FEET",
-        "resultMeasurementType": "LengthUnit",
-        "error": false
-    }
-]
-```
-
----
-
-## 🔒 Security Flow
-
-```
- CLIENT                  GATEWAY              SECURITY-SERVICE       QUANTITY-SERVICE
-    │                       │                        │                      │
-    │  POST /auth/login      │                        │                      │
-    │──────────────────────►│                        │                      │
-    │                       │   Forward to :8081     │                      │
-    │                       │───────────────────────►│                      │
-    │                       │                        │  Validate credentials │
-    │                       │                        │  Generate JWT token   │
-    │                       │◄───────────────────────│                      │
-    │◄──────────────────────│  { token: "eyJ..." }   │                      │
-    │                       │                        │                      │
-    │  POST /api/v1/... + Bearer Token               │                      │
-    │──────────────────────►│                        │                      │
-    │                       │  🔐 Validate JWT       │                      │
-    │                       │  ✅ Valid →             │                      │
-    │                       │  Add X-Auth-User header│                      │
-    │                       │──────────────────────────────────────────────►│
-    │                       │                        │  Process operation    │
-    │                       │◄──────────────────────────────────────────────│
-    │◄──────────────────────│  { result... }         │                      │
-    │                       │                        │                      │
-    │  POST /api/v1/... + Invalid Token              │                      │
-    │──────────────────────►│                        │                      │
-    │                       │  ❌ Invalid JWT         │                      │
-    │◄──────────────────────│  401 Unauthorized      │                      │
-```
-
-> 🔑 **Key Rule:** The API Gateway validates every JWT. Downstream services **trust the gateway** and don't re-validate tokens.
-
----
-
-## 🔗 Service Communication
-
-### Load-Balanced Routing via Eureka
-
-```yaml
-# API Gateway routes using lb:// (load balanced)
-spring:
-  cloud:
-    gateway:
-      routes:
-        - id: security-service
-          uri: lb://security-service        # Eureka resolves → localhost:8081
-          predicates:
-            - Path=/auth/**
-            
-        - id: quantity-service
-          uri: lb://quantity-measurement-app # Eureka resolves → localhost:8082
-          predicates:
-            - Path=/api/v1/quantities/**
-```
-
-### OpenFeign Declarative REST Client
-
-```java
-// Declarative REST client — no boilerplate HTTP code needed!
-@FeignClient(name = "quantity-measurement-app")
-public interface QuantityClient {
-
-    @PostMapping("/api/v1/quantities/add")
-    QuantityMeasurementDTO add(@RequestBody QuantityInputDTO input);
-    
-    @PostMapping("/api/v1/quantities/convert")
-    QuantityMeasurementDTO convert(@RequestBody QuantityInputDTO input);
-}
-```
-
-> 💡 `lb://` means **load balanced** — Eureka dynamically resolves the service address. Works even if the service's IP or port changes!
-
----
-
-## 📊 Eureka Dashboard
-
-After starting all services, visit:
-
-```
-🌐  http://localhost:8761
-```
-
-You will see the Eureka dashboard with all registered services:
-
-```
-┌─────────────────────────────────────────────────────────────────────────┐
-│  🔵  Eureka — Instances currently registered with Eureka                │
-├──────────────────────────────┬───────┬──────────────────┬───────────────┤
-│  Application                 │  AMIs │  Availability    │  Status       │
-├──────────────────────────────┼───────┼──────────────────┼───────────────┤
-│  API-GATEWAY                 │  n/a  │  (1)             │  ✅ UP (1)    │
-│  SECURITY-SERVICE            │  n/a  │  (1)             │  ✅ UP (1)    │
-│  QUANTITY-MEASUREMENT-APP    │  n/a  │  (1)             │  ✅ UP (1)    │
-└──────────────────────────────┴───────┴──────────────────┴───────────────┘
-```
-
----
-
-## 📚 Swagger UI
-
-> Swagger is available on individual service ports (not the gateway)
-
-| Service | Swagger URL | Status |
-|---------|------------|--------|
-| 🟢 Security Service | [http://localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html) | ✅ Available |
-| 🟡 Quantity Measurement App | [http://localhost:8082/swagger-ui.html](http://localhost:8082/swagger-ui.html) | ✅ Available |
-| 🔴 API Gateway | ❌ Not Available | Gateway only routes — no business APIs |
-
----
-
-## ⚙️ Environment Configuration
-
-### Port Summary
-
-```
-┌────────────────────────────────┬──────────┐
-│  Service                       │  Port    │
-├────────────────────────────────┼──────────┤
-│  🌐 Eureka Server              │  8761    │
-│  🔴 API Gateway                │  8080    │
-│  🟢 Security Service           │  8081    │
-│  🟡 Quantity Measurement App   │  8082    │
-│  🗄️  MySQL                     │  3306    │
-│  ⚛️  Frontend (React)          │  3000    │
-└────────────────────────────────┴──────────┘
-```
-
----
-
-### JWT Configuration
-
-```yaml
-jwt:
-  secret: **YOUR_JWT_SECRET**
-  expiration: 86400000   # 24 hours in milliseconds (86400 seconds)
-```
-
-> ⚠️ **IMPORTANT:** The **exact same** JWT secret must be configured in **both** `security-service` AND `api-gateway`. If they differ, the gateway will reject all tokens!
-
----
-
-### GitHub OAuth2 Configuration
-
-```yaml
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: YOUR_GITHUB_CLIENT_ID         # ← from GitHub OAuth App
-            client-secret: YOUR_GITHUB_CLIENT_SECRET  # ← from GitHub OAuth App
-            scope: user:email
-```
-
-> 📖 **How to get GitHub credentials:**
-> 1. Go to GitHub → Settings → Developer Settings → OAuth Apps
-> 2. Click "New OAuth App"
-> 3. Set callback URL to `http://localhost:8081/login/oauth2/code/github`
-> 4. Copy Client ID and Client Secret
-
----
-
-## ❌ Common Errors & Fixes
-
-| ❌ Error | 🔍 Cause | ✅ Fix |
-|---------|---------|-------|
-| `Connection refused on 8761` | Eureka Server not running | Start `eureka-server` first and wait for full startup |
-| `401 Unauthorized` | Missing or invalid JWT token | Add `Authorization: Bearer <token>` header |
-| `No instances available` | Service not yet registered | Wait ~30 seconds after service startup for Eureka registration |
-| `Access denied for user 'root'` | Wrong MySQL password | Update `password` in `application.yml` |
-| `Unknown database 'security_db'` | Database not created | Run `CREATE DATABASE security_db;` and `CREATE DATABASE quantity_db;` |
-| `Port 8080 already in use` | Another process using the port | Kill it: `taskkill /PID <pid> /F` (Windows) or `kill -9 <pid>` (Mac/Linux) |
-| `Could not resolve placeholder` | Wrong YAML indentation | Check spacing in `application.yml` — use spaces, not tabs |
-| `Failed to load ApplicationContext` | Dependency issue or missing config | Check `pom.xml` and run Maven reload |
-| `JWT signature mismatch` | Different secrets in services | Ensure **same** JWT secret in security-service AND api-gateway |
-
----
-
-## ✔️ Microservice Rules Followed
-
-| # | Rule | Description | Status |
-|---|------|-------------|--------|
-| 1 | **Single Responsibility** | Each service does exactly one job | ✅ |
-| 2 | **Own Database** | Each service has its own isolated database | ✅ |
-| 3 | **Service Registry** | All services register with Eureka on startup | ✅ |
-| 4 | **API Gateway** | Single entry point for all incoming traffic | ✅ |
-| 5 | **Load Balanced URLs** | `lb://` prefix instead of hardcoded host:port | ✅ |
-| 6 | **Same JWT Secret** | Consistent secret shared across security + gateway | ✅ |
-| 7 | **Gateway Handles JWT** | Downstream services trust gateway — no re-validation | ✅ |
-| 8 | **Unique Ports** | Each service runs on its own port | ✅ |
-| 9 | **Correct Startup Order** | Eureka → Services → Gateway | ✅ |
-| 10 | **Unique Package Names** | `com.security`, `com.quantity`, `com.gateway`, `com.eureka` | ✅ |
-| 11 | **DTOs for Communication** | No JPA entities exposed via REST | ✅ |
-| 12 | **Actuator Health Checks** | All services expose `/actuator/health` | ✅ |
-| 13 | **YAML Configuration** | `application.yml` used in all services | ✅ |
-
----
-
 ### Author👨‍💻
 
 [DEVARSHI MISHRA](https://github.com/devarshim973) - Software Developer👨‍💻 | Cloud Enthusiast              
 B.Tech - `[Computer Science & Engineering]`         
 Java | Spring Boot | Maven | JWT & Security | OAuth | React.js | Clean Architecture
+
