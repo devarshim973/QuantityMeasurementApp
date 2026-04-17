@@ -7,12 +7,12 @@ spring:
 
   cloud:
     gateway:
-      # Global CORS for all routes
       globalcors:
+        add-to-simple-url-handler-mapping: true
         cors-configurations:
           '[/**]':
-            allowedOrigins:
-              - "http://localhost:3000"
+            allowedOriginPatterns:
+              - "https://*.vercel.app"
             allowedMethods:
               - GET
               - POST
@@ -21,11 +21,13 @@ spring:
               - OPTIONS
             allowedHeaders:
               - "*"
-            allowCredentials: true
+            exposedHeaders:
+              - "*"
+ 
+            allowCredentials: false
 
       routes:
 
-        # ===== security-service routes (PUBLIC — no JWT check) =====
         - id: security-service-auth
           uri: lb://security-service
           predicates:
@@ -34,8 +36,6 @@ spring:
             - name: JwtAuthenticationFilter
               args:
                 secured: false
-
-        # ===== quantity-measurement-app routes (SECURED — JWT required) =====
         - id: quantity-measurement-app
           uri: lb://quantity-measurement-app
           predicates:
@@ -44,20 +44,14 @@ spring:
             - name: JwtAuthenticationFilter
               args:
                 secured: true
-
-# JWT secret (same as security-service and quantity-service)
 jwt:
   secret: ${JWT_SECRET}
-
-# Eureka Client
 eureka:
   client:
     service-url:
       defaultZone: ${EUREKA_URL:http://eureka-server:8761/eureka/}
   instance:
     prefer-ip-address: true
-
-# Actuator
 management:
   endpoints:
     web:
